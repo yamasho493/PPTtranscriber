@@ -5,7 +5,7 @@ from datetime import datetime
 def main():
     today_date = datetime.now().strftime("%Y_%m")
     #ファイルパスを記述する
-    folder_path = ""
+    folder_path = "/Users/abi01775/Documents"
     folder_with_date = os.path.join(folder_path, today_date)
     excel_file_paths = file_operation.get_excel_file_paths(folder_with_date)
 
