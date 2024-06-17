@@ -89,7 +89,23 @@ def get_monthly_regional_performance(prs, slide_number, sheet):
                     tf.paragraphs[0].font.size = Pt(16)
                     tf.paragraphs[0].alignment = PP_ALIGN.CENTER
 
+def insert_word_to_column(prs, slide_number, word):
+    slide = prs.slides[slide_number]
+
+    for shape in slide.shapes:
+        if shape.has_table:
+            table = shape.table
+            cell = table.cell(0, 1)
+            tf = cell.text_frame
+            cell.text = word
+            tf.paragraphs[0].font.name = "Meiryo UI"
+            tf.paragraphs[0].font.size = Pt(11)
+            tf.paragraphs[0].font.color.rgb = RGBColor(255, 255, 255)
+            tf.paragraphs[0].alignment = PP_ALIGN.CENTER
+
+
 if __name__ =="__main__":
     get_new_and_existing_month_club_performance()
     get_customer_number_and_unitprice_by_category()
     get_monthly_regional_performance()
+    insert_word_to_column()

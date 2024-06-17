@@ -1,4 +1,4 @@
-import number_transfer_to_textbox, number_transfer_to_table, text_inserter, file_operation, eigenvalues_from_excel, text_creater
+import number_transfer_to_textbox, transfer_to_table, text_inserter, file_operation, eigenvalues_from_excel, text_creater
 import os
 from datetime import datetime
 
@@ -57,6 +57,12 @@ def main():
         text_inserter.insert_sub_title(prs, 14, text_creater.get_performance(period_and_cumulative), 4.89, 1.25)
         text_inserter.insert_sub_title(prs, 15, text_creater.get_performance(monthly), 1.86, 0.92)
 
+        #表のカラム追加
+        transfer_to_table.insert_word_to_column(prs, 5, period_and_monthly)
+        transfer_to_table.insert_word_to_column(prs, 6, period_and_cumulative)
+        transfer_to_table.insert_word_to_column(prs, 12, period_and_monthly)
+        transfer_to_table.insert_word_to_column(prs, 13, period_and_cumulative)
+
         # #x月度実績の転記
         number_transfer_to_textbox.get_month_performances(prs, 1, all_sheets["sheet1"])
         number_transfer_to_textbox.get_month_performances(prs, 2, all_sheets["sheet2"])
@@ -84,20 +90,20 @@ def main():
         number_transfer_to_textbox.get_new_development_early_period_rate(prs, 14, all_sheets["sheet1"], 71, 73, 9, 1)
 
         # #新規/既存の転記
-        number_transfer_to_table.get_new_and_existing_month_club_performance(prs, 8, all_sheets["sheet1"], 32)
-        number_transfer_to_table.get_new_and_existing_month_club_performance(prs, 9, all_sheets["sheet2"], 32)
-        number_transfer_to_table.get_new_and_existing_month_club_performance(prs, 15, all_sheets["sheet1"], 59)
-        number_transfer_to_table.get_new_and_existing_month_club_performance(prs, 16, all_sheets["sheet2"], 59)
+        transfer_to_table.get_new_and_existing_month_club_performance(prs, 8, all_sheets["sheet1"], 32)
+        transfer_to_table.get_new_and_existing_month_club_performance(prs, 9, all_sheets["sheet2"], 32)
+        transfer_to_table.get_new_and_existing_month_club_performance(prs, 15, all_sheets["sheet1"], 59)
+        transfer_to_table.get_new_and_existing_month_club_performance(prs, 16, all_sheets["sheet2"], 59)
 
         # #カテゴリー別客数/単価の転記
-        number_transfer_to_table.get_customer_number_and_unitprice_by_category(prs, 5, all_sheets["sheet1"], 21)
-        number_transfer_to_table.get_customer_number_and_unitprice_by_category(prs, 6, all_sheets["sheet2"], 21)
-        number_transfer_to_table.get_customer_number_and_unitprice_by_category(prs, 12, all_sheets["sheet1"], 48)
-        number_transfer_to_table.get_customer_number_and_unitprice_by_category(prs, 13, all_sheets["sheet2"], 48)
+        transfer_to_table.get_customer_number_and_unitprice_by_category(prs, 5, all_sheets["sheet1"], 21)
+        transfer_to_table.get_customer_number_and_unitprice_by_category(prs, 6, all_sheets["sheet2"], 21)
+        transfer_to_table.get_customer_number_and_unitprice_by_category(prs, 12, all_sheets["sheet1"], 48)
+        transfer_to_table.get_customer_number_and_unitprice_by_category(prs, 13, all_sheets["sheet2"], 48)
 
         # #地域別実績
-        number_transfer_to_table.get_monthly_regional_performance(prs, 1, all_sheets["sheet3"])
-        number_transfer_to_table.get_monthly_regional_performance(prs, 2, all_sheets["sheet4"])
+        transfer_to_table.get_monthly_regional_performance(prs, 1, all_sheets["sheet3"])
+        transfer_to_table.get_monthly_regional_performance(prs, 2, all_sheets["sheet4"])
 
         # #ファイル名を作成して保存する
         file_operation.save_excel_file(prs, folder_with_date, monthly, agent_code, agent_name)
